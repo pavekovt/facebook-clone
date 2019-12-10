@@ -1,3 +1,4 @@
+import 'package:facebook/models/User.dart';
 import 'package:facebook/services/AuthService.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +6,9 @@ import 'package:flutter/material.dart';
 class HomeScreen extends StatelessWidget {
   static String id = "HomeScreen";
 
-  const HomeScreen({Key key}) : super(key: key);
+  final User currentUser;
+
+  const HomeScreen({Key key, this.currentUser}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +25,7 @@ class HomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
+                Text('Hello ${currentUser?.name ?? "temp"}!'),
                 FlatButton(
                   onPressed: () => AuthService.logout(),
                   color: Colors.blue,
