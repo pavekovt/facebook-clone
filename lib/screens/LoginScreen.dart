@@ -66,20 +66,32 @@ class _LoginScreenState extends State<LoginScreen> {
                             : null,
                         decoration: InputDecoration(
                           labelText: "Email",
-                          border: OutlineInputBorder(),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.zero,
+                              bottomRight: Radius.zero,
+                              topLeft: Radius.circular(3),
+                              topRight: Radius.circular(3),
+                            ),
+                          ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
-                        child: TextFormField(
-                          onChanged: (data) => setState(() => _password = data),
-                          obscureText: true,
-                          validator: (input) => input.length < 6
-                              ? 'Password should contain at least 6 characters'
-                              : null,
-                          decoration: InputDecoration(
-                            labelText: "Password",
-                            border: OutlineInputBorder(),
+                      SizedBox.fromSize(size: Size.fromHeight(10)),
+                      TextFormField(
+                        onChanged: (data) => setState(() => _password = data),
+                        obscureText: true,
+                        validator: (input) => input.length < 6
+                            ? 'Password should contain at least 6 characters'
+                            : null,
+                        decoration: InputDecoration(
+                          labelText: "Password",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.zero,
+                              topRight: Radius.zero,
+                              bottomLeft: Radius.circular(3),
+                              bottomRight: Radius.circular(3),
+                            ),
                           ),
                         ),
                       ),
@@ -100,7 +112,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               FlatButton(
-                onPressed: () => Navigator.pushNamed(context, RegisterScreen.id),
+                onPressed: () =>
+                    Navigator.pushNamed(context, RegisterScreen.id),
                 child: Text(
                   "Sign Up",
                   style: TextStyle(color: Colors.blue),

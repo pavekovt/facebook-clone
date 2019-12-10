@@ -13,4 +13,11 @@ class UserService {
     return User();
   }
 
+  static Future updateUser(User user) async {
+    await usersRef.document(user.id).updateData({
+      'name': user.name,
+      'profileImageUrl': user.profileImageUrl,
+      'city': user.city
+    });
+  }
 }

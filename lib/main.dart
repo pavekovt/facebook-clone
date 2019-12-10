@@ -37,7 +37,11 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Facebook',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          // primarySwatch: Colors.blue,
+          appBarTheme: AppBarTheme(
+            // color: Colors.black,
+            // actionsIconTheme: IconThemeData(color: Colors.black) 
+          ),
         ),
         home: _getScreen(),
         routes: {
