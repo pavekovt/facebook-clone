@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "945003675460",
+    "firebase_url": "https://facebook-84452.firebaseio.com",
+    "project_id": "facebook-84452",
+    "storage_bucket": "facebook-84452.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:945003675460:android:42d8bb8b90e22b62c5e111",
+        "android_client_info": {
+          "package_name": "me.pavekovt.facebook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "945003675460-ppe537obgadfqccmv616su96jr6r9avq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAW_PhrxhaGJkDMyxifpIyoAmIuSSd1_FQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "945003675460-ppe537obgadfqccmv616su96jr6r9avq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
