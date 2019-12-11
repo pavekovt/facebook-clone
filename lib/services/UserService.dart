@@ -20,4 +20,8 @@ class UserService {
       'city': user.city
     });
   }
+
+  static Future<QuerySnapshot> streamForUsers(String name) async {
+    return await usersRef.where('name', isGreaterThan: name).getDocuments();
+  }
 }

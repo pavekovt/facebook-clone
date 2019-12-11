@@ -2,8 +2,8 @@ import 'package:async_redux/async_redux.dart';
 import 'package:facebook/domain/AppState.dart';
 import 'package:facebook/models/User.dart';
 import 'package:facebook/screens/pages/FeedPage.dart';
-import 'package:facebook/screens/pages/FriendSuggestionPage.dart';
 import 'package:facebook/screens/pages/NotificationPage.dart';
+import 'package:facebook/screens/pages/PeopleSearchPage.dart';
 import 'package:facebook/screens/pages/ProfilePage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -94,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
           physics: NeverScrollableScrollPhysics(),
           children: <Widget>[
             FeedPage(),
-            FriendSuggestionPage(),
+            PeopleSearchPageConnector(),
             ProfilePage(
               user: widget.currentUser,
             ),
