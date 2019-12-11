@@ -6,17 +6,11 @@ import 'package:uuid/uuid.dart';
 
 class StorageService {
   static Future<String> uploadUserProfileImage(
-      String url, File imageFile) async {
-    String photoId = Uuid().v4();
-
-    if (url.isNotEmpty) {
-      // Updating user profile image
-      RegExp exp = RegExp(r'userProfile_(.*).jpg');
-      photoId = exp.firstMatch(url)[1];
-    }
-
+    String userId,
+    File imageFile,
+  ) async {
     StorageUploadTask uploadTask = storageRef
-        .child('images/users/userProfile_$photoId.jpg')
+        .child('images/users/userProfile_$userId.jpg')
         .putFile(imageFile);
     StorageTaskSnapshot storageSnap = await uploadTask.onComplete;
     String downloadUrl = await storageSnap.ref.getDownloadURL();

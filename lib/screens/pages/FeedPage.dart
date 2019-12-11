@@ -1,5 +1,4 @@
 import 'package:facebook/services/AuthService.dart';
-import 'package:facebook/services/UserService.dart';
 import 'package:flutter/material.dart';
 
 class FeedPage extends StatelessWidget {

@@ -1,13 +1,8 @@
-import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:facebook/connectors/EditProfileScreenConnector.dart';
 import 'package:facebook/models/User.dart';
 import 'package:facebook/screens/EditProfileScreen.dart';
-import 'package:facebook/services/StorageService.dart';
-import 'package:facebook/services/UserService.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 class ProfilePage extends StatefulWidget {
   final User user;

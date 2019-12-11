@@ -1,5 +1,4 @@
 import 'package:async_redux/async_redux.dart';
-import 'package:facebook/connectors/HomeScreenConnector.dart';
 import 'package:facebook/domain/AppState.dart';
 import 'package:facebook/screens/HomeScreen.dart';
 import 'package:facebook/screens/LoginScreen.dart';

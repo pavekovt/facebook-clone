@@ -1,3 +1,5 @@
+import 'package:async_redux/async_redux.dart';
+import 'package:facebook/domain/AppState.dart';
 import 'package:facebook/models/User.dart';
 import 'package:facebook/screens/pages/FeedPage.dart';
 import 'package:facebook/screens/pages/FriendSuggestionPage.dart';
@@ -6,6 +8,32 @@ import 'package:facebook/screens/pages/ProfilePage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+
+class HomeScreenConnector extends StatelessWidget {
+  const HomeScreenConnector({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return StoreConnector<AppState, _ViewModel>(
+      model: _ViewModel(),
+      builder: (context, vm) => HomeScreen(
+        currentUser: vm.currentUser,
+      ),
+    );
+  }
+}
+
+class _ViewModel extends BaseModel<AppState> {
+  User currentUser;
+
+  _ViewModel({this.currentUser}): super(equals: [currentUser]);
+
+  @override
+  BaseModel fromStore() {
+    return _ViewModel(currentUser: store.state.currentUser);
+  }
+}
+
 
 class HomeScreen extends StatefulWidget {
   static String id = "HomeScreen";
