@@ -6,8 +6,9 @@ class User {
   String email;
   String profileImageUrl;
   String city;
+  List<String> friends;
 
-  User({this.id, this.city, this.name, this.profileImageUrl, this.email});
+  User({this.id, this.city, this.name, this.profileImageUrl, this.email, this.friends});
 
   factory User.fromDoc(DocumentSnapshot doc) {
     return User(

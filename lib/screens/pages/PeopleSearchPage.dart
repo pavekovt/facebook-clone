@@ -16,6 +16,7 @@ class PeopleSearchPageConnector extends StatelessWidget {
       builder: (context, vm) => PeopleSearchPage(
         foundUsers: vm.foundUsers,
         searchUsers: vm.searchUsers,
+        currentUser: vm.currentUser,
       ),
     );
   }
@@ -24,23 +25,27 @@ class PeopleSearchPageConnector extends StatelessWidget {
 class _ViewModel extends BaseModel<AppState> {
   List<User> foundUsers;
   Function(String) searchUsers;
+  User currentUser;
 
-  _ViewModel({this.foundUsers, this.searchUsers}) : super(equals: [foundUsers]);
+  _ViewModel({this.foundUsers, this.searchUsers, this.currentUser}) : super(equals: [foundUsers, currentUser]);
 
   @override
   BaseModel fromStore() {
     return _ViewModel(
         foundUsers: state.foundUsers,
-        searchUsers: (name) => store.dispatch(StartSearchingUsers(name: name)));
+        searchUsers: (name) => store.dispatch(StartSearchingUsers(name: name)),
+        currentUser: state.currentUser,
+    );
   }
 }
 
 class PeopleSearchPage extends StatefulWidget {
   final List<User> foundUsers;
   final Function(String) searchUsers;
+  final User currentUser;
 
   const PeopleSearchPage(
-      {Key key, this.foundUsers = const [], this.searchUsers})
+      {Key key, this.foundUsers = const [], this.searchUsers, this.currentUser})
       : super(key: key);
 
   @override
@@ -50,17 +55,24 @@ class PeopleSearchPage extends StatefulWidget {
 class _PeopleSearchPageState extends State<PeopleSearchPage> {
   String _searchName;
 
+  getMutualFriendsAmount(User user) {
+    return widget.currentUser.friends.where((f) => user.friends.contains(f)).length;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          height: MediaQuery.of(context).size.height,
+          height: MediaQuery.of(context).size.height - 200,
           width: MediaQuery.of(context).size.width,
           child: Column(
             children: <Widget>[
-              CupertinoTextField(
-                onChanged: (input) => setState(() => _searchName = input),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CupertinoTextField(
+                  onChanged: (input) => setState(() => _searchName = input),
+                ),
               ),
               FlatButton(
                 child: Text("Search"),
@@ -109,7 +121,7 @@ class _PeopleSearchPageState extends State<PeopleSearchPage> {
                                 Padding(
                                   padding: const EdgeInsets.only(top: 4),
                                   child: Text(
-                                    "4 mutual friend",
+                                    "${getMutualFriendsAmount(user)} mutual friend",
                                     style: TextStyle(color: Colors.grey),
                                   ),
                                 ),

@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
           // primarySwatch: Colors.blue,
           appBarTheme: AppBarTheme(
             // color: Colors.black,
-            // actionsIconTheme: IconThemeData(color: Colors.black) 
+            // actionsIconTheme: IconThemeData(color: Colors.black)
           ),
         ),
         home: _getScreen(),

@@ -14,12 +14,15 @@ class StartSearchingUsers extends ReduxAction<AppState> {
   StartSearchingUsers({@required this.name});
 
   @override
-  AppState reduce() {
+  Future<AppState> reduce() async {
     stream = UserService.streamForUsers(name).asStream();
-    stream.listen((snapshot) {
-      List<User> users = snapshot.documents.map((userSnap) { 
-        return User.fromDoc(userSnap);
-      }).toList();      
+    stream.listen((snapshot) async {
+      List<User> users = await Future.wait(snapshot.documents.map((userSnap) async { 
+        var userFriends = await UserService.userFriends(userSnap.documentID);
+        var user = User.fromDoc(userSnap);
+        user.friends = userFriends.map((f) => f.documentID).toList();
+        return user;
+      }).toList());
       dispatch(SetSearchedUsers(users: users));
     });
 
