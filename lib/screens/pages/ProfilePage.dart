@@ -1,4 +1,3 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:facebook/models/User.dart';
 import 'package:facebook/screens/EditProfileScreen.dart';
@@ -14,8 +13,6 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

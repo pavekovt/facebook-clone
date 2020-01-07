@@ -27,11 +27,44 @@ class UserService {
   }
 
   static Future<QuerySnapshot> streamForUsers(String name) async {
-    return await usersRef.where('name', isGreaterThan: name).getDocuments();
+    return await usersRef.orderBy('name').startAt([name]).endAt([name + '\uf8ff']).getDocuments();
   }
 
   static Future<List<DocumentSnapshot>> userFriends(String userId) async {
     var querySnapshot = usersRef.document(userId).collection(friendCollection);
     return (await querySnapshot.getDocuments()).documents;
+  }
+
+  static Future inviteOrAcceptFriend(String currentUserId, String userId) async {
+    var userInviteRef = usersRef.document(currentUserId)
+          .collection(frinedInviteCollection)
+          .document(userId);
+
+    var userInviteExists = await userInviteRef 
+          .get()
+          .then((value) => value.exists);
+
+    // Accepting invite of this user
+    if (userInviteExists) {
+      userInviteRef.delete();
+      return addFriend(currentUserId, userId);
+    }
+
+    //Inviting user to be friend
+    usersRef.document(userId).collection(frinedInviteCollection).document(currentUserId).setData({});
+  }
+
+  static Future addFriend(String currentUserId, String userId) async {
+    return Future.wait([
+      usersRef.document(currentUserId).collection(friendCollection).document(userId).setData({}),
+      usersRef.document(userId).collection(friendCollection).document(currentUserId).setData({}),
+    ]);
+  }
+
+  static Future removeFriend(String currentUserId, String userId) async {
+    return Future.wait([
+      usersRef.document(currentUserId).collection(friendCollection).document(userId).delete(),
+      usersRef.document(userId).collection(friendCollection).document(currentUserId).delete(),
+    ]);
   }
 }
