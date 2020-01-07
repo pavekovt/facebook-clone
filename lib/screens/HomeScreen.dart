@@ -68,6 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
+          automaticallyImplyLeading: true,
           elevation: 0,
           title: Text(
             'Facebook',
@@ -97,6 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
             PeopleSearchPageConnector(),
             ProfilePage(
               user: widget.currentUser,
+              editableProfile: true,
             ),
             NotificationPage(),
           ],

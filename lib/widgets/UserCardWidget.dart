@@ -1,6 +1,7 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:facebook/domain/AppState.dart';
 import 'package:facebook/models/User.dart';
+import 'package:facebook/screens/pages/ProfilePage.dart';
 import 'package:facebook/state/InviteOrAcceptInvite.dart';
 import 'package:facebook/state/RemoveFriend.dart';
 import 'package:facebook/widgets/UserAvatarWidget.dart';
@@ -104,11 +105,23 @@ class UserCardWidget extends StatelessWidget {
               children: <Widget>[
                 Row(
                   children: <Widget>[
-                    Text(
-                      user.name,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProfilePage(
+                              user: user,
+                            ),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        user.name,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
                       ),
                     ),
                     user.city.isNotEmpty

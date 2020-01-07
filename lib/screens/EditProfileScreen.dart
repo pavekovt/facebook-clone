@@ -6,6 +6,7 @@ import 'package:facebook/domain/AppState.dart';
 import 'package:facebook/models/User.dart';
 import 'package:facebook/state/UpdateAndSetCurrentUser.dart';
 import 'package:facebook/state/UpdateUserProfileImageAction.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -90,9 +91,37 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     }
   }
 
-  _chageImage() async {
-    File image = await ImagePicker.pickImage(source: ImageSource.camera);
+  _changeImage(ImageSource source) async {
+    File image = await ImagePicker.pickImage(source: source);
     setState(() => _image = image);
+  }
+
+  _chooseImageSource(context) {
+    return showCupertinoModalPopup(
+      context: context,
+      builder: (context) => CupertinoActionSheet(
+        cancelButton: CupertinoActionSheetAction(
+          onPressed: () => Navigator.pop(context),
+          child: Text("Cancel", style: TextStyle(color: CupertinoColors.systemRed)),
+        ),
+        actions: <Widget>[
+          CupertinoActionSheetAction(
+            child: Text("Camera"),
+            onPressed: () {
+              _changeImage(ImageSource.camera);
+              Navigator.pop(context);
+            },
+          ),
+          CupertinoActionSheetAction(
+            child: Text("Galery"),
+            onPressed: () {
+              _changeImage(ImageSource.gallery);
+              Navigator.pop(context);
+            },
+          )
+        ],
+      ),
+    );
   }
 
   Widget _buildProfilePicture() {
@@ -118,7 +147,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       backgroundImage: FileImage(_image),
                     ),
               GestureDetector(
-                onTap: _chageImage,
+                onTap: () => _chooseImageSource(context),
                 child: Container(
                   height: 160,
                   decoration: BoxDecoration(
